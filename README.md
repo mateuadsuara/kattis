@@ -48,3 +48,10 @@ which should be the same as the sample answer:
 71293781685339
 12345677654320
 ```
+
+### submit to kattis
+
+When you click the Submit button on the problem page (https://open.kattis.com/problems/different), it will take you to another page where you can submit the solution files (https://open.kattis.com/problems/different/submit).
+
+In the page for submitting the solution files, select the main executable file (`src-exe/Main.hs`) and the problem module (`src/ADifferentProblem.hs`).
+Uploading both will work as expected.
