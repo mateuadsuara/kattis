@@ -17,31 +17,34 @@ The `test` folder should contain any automated tests needed (eg: `test/ADifferen
 ### run the automated tests
 
 You can use the `./run-test` script included (it will use Stack or Cabal)
-This will run all the automated tests.
+This will run all the automated tests inside the `test` folder.
 
 ### execute the code
 
-First, you need to update the `src-exe/Main.hs` file so it imports the module for the problem you want to run and execute it.
+First, you need to update the `src-exe/Main.hs` file so it imports the module for the problem you want to run and use it with the main function.
 
 Then, you can use the `./run-exe` script included (it will use Stack or Cabal).
 
 If you wish to send an input automatically, you can use the `echo` command like this:
-`echo -e "1 2\n3 5\n" | ./run-exe`
-That will output:
+`echo -e "1 2\n3 5\n" | ./run-exe`.
+
+That should output the following and terminate:
 ```
 1
 2
 ```
 
 And if you have samples for the input, you can also use them like this:
-`cat test/ADifferentProblemSamples/sample.in | ./run-exe`
+`cat test/ADifferentProblemSamples/sample.in | ./run-exe`.
+
 That should output:
 ```
 2
 71293781685339
 12345677654320
 ```
-which should be the same as the sample answer:
+
+Which should be the same as the sample answer:
 `cat test/ADifferentProblemSamples/sample.ans`
 ```
 2
