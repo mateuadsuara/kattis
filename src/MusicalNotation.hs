@@ -22,16 +22,16 @@ readInput input = (amount, notes)
   where (amountStr:notesStr) = words input
         amount = (read amountStr)::Int
         notes = map readNote notesStr
-        readNote (note:[])     = (note, 1)
-        readNote (note:length) = (note, (read length)::Int)
+        readNote (pitch:[])       = (pitch, 1)
+        readNote (pitch:duration) = (pitch, (read duration)::Int)
 
 formatNotes _ [] = []
-formatNotes line@(noteInLine, separator) ((note, length):remainingNotes) =
+formatNotes line@(pitchInLine, separator) ((pitch, duration):remainingNotes) =
   noteStr ++ remainingStr
-  where noteChar = if noteInLine == note then '*' else separator
-        noteStr = replicate length noteChar
+  where noteChar = if pitchInLine == pitch then '*' else separator
+        noteStr = replicate duration noteChar
         remainingStr = formatNotes line remainingNotes
 
 io input = intercalate "\n" (map formatLine staffLines)
   where (amount, notes) = readInput input
-        formatLine line@(noteInLine, separator) = noteInLine : ':' : ' ' : formatNotes line notes
+        formatLine line@(pitchInLine, separator) = pitchInLine : ':' : ' ' : formatNotes line notes
