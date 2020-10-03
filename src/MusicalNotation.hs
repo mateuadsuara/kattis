@@ -27,8 +27,9 @@ readInput input = (amount, notes)
 
 formatNotes _ [] = []
 formatNotes line@(noteInLine, separator) ((note, length):remainingNotes) =
-  noteStr : remainingStr
-  where noteStr = if noteInLine == note then '*' else separator
+  noteStr ++ remainingStr
+  where noteChar = if noteInLine == note then '*' else separator
+        noteStr = replicate length noteChar
         remainingStr = formatNotes line remainingNotes
 
 io input = intercalate "\n" (map formatLine staffLines)
