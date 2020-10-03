@@ -1,5 +1,5 @@
 module Main where
 
-import qualified ADifferentProblem as M
+import qualified MusicalNotation as M
 
 main = M.main

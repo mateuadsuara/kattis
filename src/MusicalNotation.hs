@@ -38,3 +38,5 @@ formatNotes line@(pitchInLine, separator) ((pitch, duration):remainingNotes) =
 io input = intercalate "\n" (map formatLine staffLines)
   where (amount, notes) = readInput input
         formatLine line@(pitchInLine, separator) = pitchInLine : ':' : ' ' : formatNotes line notes
+
+main = interact io
