@@ -8,7 +8,7 @@ spec = do
   describe "io" $ do
     it "no notes" $ do
       io "0\n"
-      `shouldBe` 
+      `shouldBe`
          "G: \n\
          \F: \n\
          \E: \n\

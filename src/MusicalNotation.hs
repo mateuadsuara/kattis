@@ -1,3 +1,4 @@
+-- https://open.kattis.com/problems/musicalnotation
 module MusicalNotation where
 
 import Data.List
