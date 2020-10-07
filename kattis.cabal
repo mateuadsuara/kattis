@@ -19,6 +19,7 @@ extra-source-files:  CHANGELOG.md
 library
   exposed-modules:     ADifferentProblem
                      , MusicalNotation
+                     , MusicalNotation2
   -- other-modules:
   -- other-extensions:
   build-depends:       base >=4.13 && <4.14

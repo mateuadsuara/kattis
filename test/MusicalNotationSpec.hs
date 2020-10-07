@@ -1,10 +1,25 @@
 module MusicalNotationSpec where
 
 import Test.Hspec
+import Test.QuickCheck
 import MusicalNotation
+import MusicalNotation2 (musicalNotationCLI)
+import Data.List
+
+notes = do
+  pitch <- elements (['A'..'G'] ++ ['a'..'g'])
+  length <- elements [1..4]
+  return $ pitch:(if length > 1 then show length else "")
+
+songs = listOf1 notes `suchThatMap` \song ->
+  Just $ (show $ length song) ++ "\n" ++ (intercalate " " song)
 
 spec :: Spec
 spec = do
+  describe "properties" $ do
+    it "works as version 2" $ do
+      property $ forAll songs $ \song ->
+        (io song) == (musicalNotationCLI song)
   describe "io" $ do
     it "no notes" $ do
       io "0\n"
