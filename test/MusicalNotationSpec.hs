@@ -12,14 +12,15 @@ notes = do
   return $ pitch:(if length > 1 then show length else "")
 
 songs = listOf1 notes `suchThatMap` \song ->
-  Just $ (show $ length song) ++ "\n" ++ (intercalate " " song)
+  Just $ ((show $ length song), (intercalate " " song))
 
 spec :: Spec
 spec = do
   describe "properties" $ do
     it "works as version 2" $ do
-      property $ forAll songs $ \song ->
-        (io song) == (musicalNotationCLI song)
+      withMaxSuccess 1000000 $ property $ forAll songs $ \(length, notes) ->
+        let song = length ++ "\n" ++ notes
+        in (io song) == (musicalNotationCLI notes)
   describe "io" $ do
     it "no notes" $ do
       io "0\n"
