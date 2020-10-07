@@ -40,6 +40,7 @@ test-suite kattis-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             MainSpec.hs
+  ghc-options:         -threaded
   other-modules:       ADifferentProblemSpec
                      , MusicalNotationSpec
   build-depends:       base >=4.13 && <4.14

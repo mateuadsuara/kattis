@@ -6,6 +6,12 @@ import MusicalNotation
 import MusicalNotation2 (musicalNotationCLI)
 import Data.List
 
+possibleSongs =
+  concat $ map permutations $ subsequences possibleNotes
+
+possibleNotes =
+  [pitch:(if length > 1 then show length else "") | pitch <- ['A'..'G'] ++ ['a'..'g'], length <- [1..4]]
+
 notes = do
   pitch <- elements (['A'..'G'] ++ ['a'..'g'])
   length <- elements [1..4]
@@ -15,9 +21,14 @@ songs = listOf1 notes `suchThatMap` \song ->
   Just $ ((show $ length song), (intercalate " " song))
 
 spec :: Spec
-spec = do
-  describe "properties" $ do
-    it "works as version 2" $ do
+spec = parallel $ do
+  fdescribe "properties" $ do
+    (flip mapM) (take 500000 $ drop 500000 possibleSongs) $ \notes ->
+      let notesStr = (intercalate " " notes)
+          song     = (show $ length notes) ++ "\n" ++ notesStr
+      in it ("works for the song " ++ notesStr) $ do
+        (io song) `shouldBe` (musicalNotationCLI notesStr)
+    xit "works as version 2" $ do
       withMaxSuccess 1000000 $ property $ forAll songs $ \(length, notes) ->
         let song = length ++ "\n" ++ notes
         in (io song) == (musicalNotationCLI notes)
