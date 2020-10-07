@@ -22,16 +22,16 @@ songs = listOf1 notes `suchThatMap` \song ->
 
 spec :: Spec
 spec = parallel $ do
-  fdescribe "properties" $ do
-    (flip mapM) (take 500000 $ drop 500000 possibleSongs) $ \notes ->
-      let notesStr = (intercalate " " notes)
-          song     = (show $ length notes) ++ "\n" ++ notesStr
-      in it ("works for the song " ++ notesStr) $ do
-        (io song) `shouldBe` (musicalNotationCLI notesStr)
-    xit "works as version 2" $ do
-      withMaxSuccess 1000000 $ property $ forAll songs $ \(length, notes) ->
-        let song = length ++ "\n" ++ notes
-        in (io song) == (musicalNotationCLI notes)
+  --describe "properties" $ do
+  --  (flip mapM) (take 500000 $ drop 500000 possibleSongs) $ \notes ->
+  --    let notesStr = (intercalate " " notes)
+  --        song     = (show $ length notes) ++ "\n" ++ notesStr
+  --    in it ("works for the song " ++ notesStr) $ do
+  --      (io song) `shouldBe` (musicalNotationCLI notesStr)
+  --  it "works as version 2" $ do
+  --    withMaxSuccess 1000000 $ property $ forAll songs $ \(length, notes) ->
+  --      let song = length ++ "\n" ++ notes
+  --      in (io song) == (musicalNotationCLI notes)
   describe "io" $ do
     it "no notes" $ do
       io "0\n"
